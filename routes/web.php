@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\RegisterUserController;
 
-Route::view('/', 'welcome')->name('index');
-Route::view('/home', 'home')->name('home');
+Route::view('/', 'welcome')->name('welcome');
+Route::view('/home', 'home')->name('home')->middleware(AuthMiddleware::class);
 
-Route::get('/register', [RegisterUserController::class, 'register'])->name('register');
-Route::post('/register', [RegisterUserController::class, 'store'])->name('register.store');
-Route::get('/login', [LoginUserController::class, 'login'])->name('login');
-Route::post('/login', [LoginUserController::class, 'store'])->name('login.store');
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LogoutController::class, 'destroy'])->name('login.destroy');
