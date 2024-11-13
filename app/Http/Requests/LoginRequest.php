@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $email
+ * @property string $password
+ */
 class LoginRequest extends FormRequest
 {
     /**
@@ -22,8 +26,22 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'email|required',
-            'password' => 'string|required|min:8',
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Адрес электронной почты обязателен для заполнения.',
+            'email.email' => 'Пожалуйста, введите корректный адрес электронной почты.',
+            'password.required' => 'Пароль обязателен для заполнения.',
+            'password.min' => 'Пароль должен содержать не менее :min символов.',
+        ];
+    }
+
 }

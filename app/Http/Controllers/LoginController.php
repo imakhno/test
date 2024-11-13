@@ -36,7 +36,12 @@ class LoginController extends Controller
     {
         $request->validated();
 
-        return $this->loginService->login($request);
-
+        if ($this->loginService->store($request->email, $request->password)) {
+            return redirect()->intended(route('home'));
+        } else {
+            return back()
+                ->withInput()
+                ->withErrors(['password' => 'Неверное имя пользователя или пароль']);
+        }
     }
 }

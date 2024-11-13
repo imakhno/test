@@ -13,14 +13,14 @@
         @csrf
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Имя</label>
-            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input name="name" value="{{ old('name') }}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             @error('name')
             <span style="color:red;">{{ $message }}</span>
             @enderror
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
-            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input name="email" value="{{ old('email') }}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             @error('email')
             <span style="color:red;">{{ $message }}</span>
             @enderror
