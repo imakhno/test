@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class LogoutService

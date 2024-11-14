@@ -2,31 +2,22 @@
 
 namespace App\Services;
 
-use App\Http\Requests\LoginRequest;
+
 use Illuminate\Database\QueryException;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Mockery\Exception;
 
 class LoginService
 {
-//    /**
-//     * @param LoginRequest $request
-//     * @return RedirectResponse
-//     */
-//    public function login(LoginRequest $request): RedirectResponse
-//    {
-//        if (Auth::guard('web')->attempt([
-//            'email' => $request->email,
-//            'password' => $request->password,
-//        ])) {
-//            return redirect()->intended(route('home'));
-//        } else {
-//            return back()->withErrors([
-//                'email' => 'Error',
-//            ]);
-//        }
-//    }
+    /**
+     * @return View
+     */
+    public function index(): View
+    {
+        return view('auth.login');
+    }
+
     /**
      * @param $email
      * @param $password
@@ -34,13 +25,9 @@ class LoginService
      */
     public function store($email, $password): bool
     {
-        try {
-            return Auth::guard('web')->attempt([
-                'email' => $email,
-                'password' => $password,
-            ]);
-        } catch (QueryException $exception) {
-            return $exception->getMessage();
-        }
+        return Auth::guard('web')->attempt([
+            'email' => $email,
+            'password' => $password,
+        ]);
     }
 }

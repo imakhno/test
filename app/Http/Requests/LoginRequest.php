@@ -26,8 +26,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|string|min:8',
+            'email' => 'required|email|exists:App\Models\User,email',
+            'password' => 'required|string',
         ];
     }
 
@@ -37,11 +37,11 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Адрес электронной почты обязателен для заполнения.',
-            'email.email' => 'Пожалуйста, введите корректный адрес электронной почты.',
-            'password.required' => 'Пароль обязателен для заполнения.',
-            'password.min' => 'Пароль должен содержать не менее :min символов.',
+            'email.required' => 'Введите email',
+            'email.email' => 'Email не корректен',
+            'email.exists' => 'Пользователь не найден',
+            'password.required' => 'Введите пароль',
+            'password.string' => 'Пароль не корректен',
         ];
     }
-
 }

@@ -21,7 +21,7 @@
                              style="width: 150px; z-index: 1">
                         <h5 class="my-3">{{ Auth::user()->name}}</h5>
                         <p class="text-muted mb-1">Full Stack Developer</p>
-                        <form action="{{ route('login.destroy') }}" method="POST"
+                        <form action="{{ route('logout.destroy') }}" method="POST"
                               class="d-flex justify-content-center mb-2">
                             @csrf
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">
@@ -39,7 +39,7 @@
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ Auth::user()->name}}</p>
+                                <p class="text-muted mb-0">{{ Auth::user()->name}} {{ Auth::user()->surname}} </p>
                             </div>
                         </div>
                         <hr>
@@ -48,7 +48,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ Auth::user()->email}}</p>
+                                <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
                             </div>
                         </div>
                         <hr>

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Services\LoginService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Mockery\Exception;
 
 class LoginController extends Controller
 {
@@ -23,25 +23,20 @@ class LoginController extends Controller
     /**
      * @return View
      */
-    public function login(): View
+    public function index(): View
     {
-        return view('auth.login');
+        return $this->loginService->index();
     }
 
-    /**
-     * @param LoginRequest $request
-     * @return RedirectResponse
-     */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $loginRequest): RedirectResponse
     {
-        $request->validated();
-
-        if ($this->loginService->store($request->email, $request->password)) {
-            return redirect()->intended(route('home'));
-        } else {
-            return back()
-                ->withInput()
-                ->withErrors(['password' => 'Неверное имя пользователя или пароль']);
+        if ($this->loginService->store($loginRequest->email, $loginRequest->password)) {
+            return redirect()->route('home');
         }
+
+        return back()->withInput()->withErrors([
+            'password' => 'Неверный email или пароль.',
+        ]);
     }
+
 }

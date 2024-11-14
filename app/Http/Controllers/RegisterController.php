@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Requests\RegisterRequest;
 use App\Services\RegisterService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Mockery\Exception;
 
 class RegisterController extends Controller
 {
@@ -23,25 +23,33 @@ class RegisterController extends Controller
     /**
      * @return View
      */
-    public function register(): View
+    public function index(): View
     {
-        return view('auth.register');
+        return $this->registerService->index();
     }
 
     /**
-     * @param RegisterRequest $request
+     * @param RegisterRequest $registerRequest
      * @return RedirectResponse
      */
-    public function store(RegisterRequest $request): RedirectResponse
+    public function store(RegisterRequest $registerRequest): RedirectResponse
     {
-        $request->validated();
-        $this->registerService->register(
-            $request->only(
+        $registerRequest->validated();
+
+        try {
+
+            $this->registerService->store($registerRequest->only(
                 'name',
+                'surname',
                 'email',
                 'password',
             ));
 
-        return redirect(route('home'));
+            return redirect()->route('home')->with('success', 'Регистрация прошла успешно!');
+
+        } catch (Exception $exception) {
+            return back()->withInput()->withErrors(['error' => $exception->getMessage()]);
+        }
+
     }
 }

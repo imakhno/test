@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\LogoutService;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class LogoutController extends Controller
 {
@@ -18,14 +17,13 @@ class LogoutController extends Controller
         $this->logoutService = $logoutService;
     }
 
+
     /**
-     * @return View
+     * @return RedirectResponse
      */
-    public function destroy(): View
+    public function destroy(): RedirectResponse
     {
         $this->logoutService->destroy();
-
-        return view('welcome');
+        return redirect(route('welcome'));
     }
-
 }
