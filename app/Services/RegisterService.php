@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Services\DTO\RegisterNewUserDTO;
 use Exception;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
@@ -21,18 +21,19 @@ class RegisterService
     }
 
     /**
-     * @param array $data
+     * @param RegisterNewUserDTO $registerNewUserDTO
      * @return User
      * @throws Exception
      */
-    public function store(array $data): User
+    public function store(RegisterNewUserDTO $registerNewUserDTO): User
     {
         try {
+
             $user = User::create([
-                'name' => $data['name'],
-                'surname' => $data['surname'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
+                'name' => $registerNewUserDTO->getName(),
+                'surname' => $registerNewUserDTO->getSurname(),
+                'email' => $registerNewUserDTO->getEmail(),
+                'password' => Hash::make($registerNewUserDTO->getPassword()),
             ]);
 
             Auth::login($user);

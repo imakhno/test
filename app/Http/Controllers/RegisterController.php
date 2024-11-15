@@ -31,19 +31,14 @@ class RegisterController extends Controller
     /**
      * @param RegisterRequest $registerRequest
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function store(RegisterRequest $registerRequest): RedirectResponse
     {
-        $registerRequest->validated();
 
         try {
 
-            $this->registerService->store($registerRequest->only(
-                'name',
-                'surname',
-                'email',
-                'password',
-            ));
+            $this->registerService->store($registerRequest->createRegisterNewUserDto());
 
             return redirect()->route('home')->with('success', 'Регистрация прошла успешно!');
 

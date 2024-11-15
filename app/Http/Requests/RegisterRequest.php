@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\DTO\RegisterNewUserDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -60,5 +61,15 @@ class RegisterRequest extends FormRequest
 
             'password_confirm.required' => 'Повтор пароля обязателен для заполнения.',
         ];
+    }
+
+    public function createRegisterNewUserDto(): RegisterNewUserDTO
+    {
+        return new RegisterNewUserDTO(
+            $this->input('name'),
+            $this->input('surname'),
+            $this->input('email'),
+            $this->input('password'),
+        );
     }
 }

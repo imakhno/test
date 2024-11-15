@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * @method static create()
+ * @method static create(array $data)
  * @property int $id
  * @property string $name
  * @property string $surname
