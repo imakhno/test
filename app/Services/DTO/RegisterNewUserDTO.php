@@ -2,7 +2,7 @@
 
 namespace App\Services\DTO;
 
-class RegisterNewUserDTO
+readonly class RegisterNewUserDTO
 {
     public function __construct
     (
@@ -23,27 +23,11 @@ class RegisterNewUserDTO
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return string
      */
     public function getSurname(): string
     {
         return $this->surname;
-    }
-
-    /**
-     * @param string $surname
-     */
-    public function setSurname(string $surname): void
-    {
-        $this->surname = $surname;
     }
 
     /**
@@ -55,14 +39,6 @@ class RegisterNewUserDTO
     }
 
     /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
      * @return string
      */
     public function getPassword(): string
@@ -70,12 +46,5 @@ class RegisterNewUserDTO
         return $this->password;
     }
 
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
 
 }

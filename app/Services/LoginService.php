@@ -19,11 +19,11 @@ class LoginService
     }
 
     /**
-     * @param $email
-     * @param $password
+     * @param string $email
+     * @param string $password
      * @return bool
      */
-    public function store($email, $password): bool
+    public function store(string $email, string $password): bool
     {
         return Auth::guard('web')->attempt([
             'email' => $email,

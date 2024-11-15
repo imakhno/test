@@ -11,11 +11,19 @@ use Illuminate\Foundation\Http\FormRequest;
 class LoginRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * @return string
      */
-    public function authorize(): bool
+    public function getEmail(): string
     {
-        return true;
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 
     /**

@@ -28,9 +28,13 @@ class LoginController extends Controller
         return $this->loginService->index();
     }
 
+    /**
+     * @param LoginRequest $loginRequest
+     * @return RedirectResponse
+     */
     public function store(LoginRequest $loginRequest): RedirectResponse
     {
-        if ($this->loginService->store($loginRequest->email, $loginRequest->password)) {
+        if ($this->loginService->store($loginRequest->getEmail(), $loginRequest->getPassword())) {
             return redirect()->route('home');
         }
 

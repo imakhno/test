@@ -14,11 +14,35 @@ use Illuminate\Foundation\Http\FormRequest;
 class RegisterRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * @return string
      */
-    public function authorize(): bool
+    public function getName(): string
     {
-        return true;
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSurname(): string
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 
     /**
